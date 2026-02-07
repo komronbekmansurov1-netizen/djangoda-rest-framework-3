@@ -1,15 +1,16 @@
-from django.urls import path
-from .views import Salom1ModelView, Salom2ModelView, Salom3ModelView, Salom4ModelView, Salom5ModelView
+from django.urls import path, include
+from rest_framework.routers import DefaultRouter
+from tortinchi.views import (Salom1ModelView, Salom2ModelView, Salom3ModelView, Salom4ModelView, Salom5ModelView)
+
+
+router = DefaultRouter()
+router.register(r'1', Salom1ModelView, basename='salom1')
+router.register(r'2', Salom2ModelView, basename='salom2')
+router.register(r'3', Salom3ModelView, basename='salom3')
+router.register(r'4', Salom4ModelView, basename='salom4')
+router.register(r'5', Salom5ModelView, basename='salom5')
+
 
 urlpatterns = [
-    path('salom1/', Salom1ModelView.as_view({'get': 'list'})),
-    path('salom1/<int:pk>', Salom1ModelView.as_view({'get': 'list'})),
-    path('salom2/', Salom2ModelView.as_view({'get': 'list'})),
-    path('salom2/<int:pk>', Salom2ModelView.as_view({'get': 'list'})),
-    path('salom3/', Salom3ModelView.as_view({'get': 'list'})),
-    path('salom3/<int:pk>', Salom3ModelView.as_view({'get': 'list'})),
-    path('salom4/', Salom4ModelView.as_view({'get': 'list'})),
-    path('salom4/<int:pk>', Salom4ModelView.as_view({'get': 'list'})),
-    path('salom5/', Salom5ModelView.as_view({'get': 'list'})),
-    path('salom5/<int:pk>', Salom5ModelView.as_view({'get': 'list'})),
+    path('', include(router.urls)),
 ]
